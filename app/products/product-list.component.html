@@ -1,0 +1,67 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div>
+
+    <!-- Filter the Products   -->
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-2'>Filter by:</div>
+            <div class='col-md-4'>
+                <input type='text' [(ngModel)]='listFilter' />
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-2'>User Name:</div>
+            <div class='col-md-4'>
+                <input type='text' [(ngModel)]='userName' />
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-2'>Sort By:</div>
+            <div class='col-md-4'>
+                <input type='text' [(ngModel)]='sortBy' />
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-6'>
+                <button class='btn btn-primary' (click)='updateRepository()'>
+                                    Update Repository
+                            </button>
+            </div>
+        </div>
+        
+        <div class='row'>
+            <div class='col-md-6'>
+                <h3>Filtered by: {{listFilter}}</h3>
+            </div>
+        </div>
+
+
+        <div class='table-responsive'>
+            <table class='table' *ngIf='products && products.length'>
+                <thead>
+                    <tr>
+                        
+                        <th>Full Name</th>
+                        <th>Created</th>
+                        <th>Updated</th>
+                        <th>Pushed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let product of products | productFilter : listFilter'>
+                        
+                        <td><a [routerLink]="['/contributors',product.contributors_url]">
+                            {{product.full_name}}</a></td>
+                        <td>{{product.created_at | lowercase}}</td>
+                        <td>{{product.updated_at}}</td>
+                        <td>{{product.pushed_at}}</td>
+                    </tr>
+                    
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
